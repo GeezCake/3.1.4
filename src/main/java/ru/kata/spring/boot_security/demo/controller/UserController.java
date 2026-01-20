@@ -11,10 +11,9 @@ import ru.kata.spring.boot_security.demo.model.User;
 public class UserController {
 
     @GetMapping("/user")
-    public String userPage(@AuthenticationPrincipal User user, Model model) {
-        // user — это наш User из БД (UserDetails)
+    public String showUserPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        return "user"; // templates/user.html
+        return "user";
     }
 }
 

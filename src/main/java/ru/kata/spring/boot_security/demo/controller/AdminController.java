@@ -23,57 +23,41 @@ public class AdminController {
         this.userService = userService;
     }
 
-    // ======= список пользователей =======
     @GetMapping
-    public String allUsers(Model model) {
-        List<User> users = userService.getAll();
+    public String showAllUsers(Model model) {
+        List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "admin/users";          // ИМЕННО admin/users.html
+        return "admin/users";
     }
 
-    // ======= форма добавления =======
     @GetMapping("/add")
     public String addUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "admin/user-form";      // admin/user-form.html
+        return "admin/user-form";
     }
 
-    // ======= создание нового пользователя =======
     @PostMapping("/save")
     public String createUser(@ModelAttribute("user") User user) {
-
-        if (user.getUsername() == null || user.getUsername().isEmpty()) {
-            user.setUsername(user.getEmail());
-        }
-
-        userService.create(user);
+        userService.createUser(user);
         return "redirect:/admin";
     }
 
-    // ======= форма редактирования =======
     @GetMapping("/edit")
     public String editUser(@RequestParam("id") Long id, Model model) {
-        User existing = userService.getById(id);
+        User existing = userService.getUserById(id);
         model.addAttribute("user", existing);
         return "admin/user-form";
     }
 
-    // ======= обновление пользователя =======
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user) {
-
-        if (user.getUsername() == null || user.getUsername().isEmpty()) {
-            user.setUsername(user.getEmail());
-        }
-
-        userService.update(user);
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
-    // ======= удаление пользователя =======
     @PostMapping("/delete")
     public String deleteUser(@RequestParam("id") Long id) {
-        userService.delete(id);
+        userService.deleteUser(id);
         return "redirect:/admin";
     }
 }

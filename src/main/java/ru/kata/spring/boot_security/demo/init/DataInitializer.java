@@ -34,13 +34,11 @@ public class DataInitializer {
             return;
         }
 
-        // --- Роли ---
         Role roleAdmin = new Role("ROLE_ADMIN");
         Role roleUser = new Role("ROLE_USER");
         entityManager.persist(roleAdmin);
         entityManager.persist(roleUser);
 
-        // --- Admin ---
         User admin = new User();
         admin.setUsername("admin@mail.ru");
         admin.setPassword(passwordEncoder.encode("admin"));
@@ -52,7 +50,6 @@ public class DataInitializer {
         admin.getRoles().add(roleUser);
         entityManager.persist(admin);
 
-        // --- User ---
         User user = new User();
         user.setUsername("user@mail.ru");
         user.setPassword(passwordEncoder.encode("user"));

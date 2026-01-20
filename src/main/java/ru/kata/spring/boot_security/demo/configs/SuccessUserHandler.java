@@ -22,11 +22,11 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
         if (roles.contains("ROLE_ADMIN")) {
-            response.sendRedirect("/admin");   // админ → /admin
+            response.sendRedirect("/admin");
         } else if (roles.contains("ROLE_USER")) {
-            response.sendRedirect("/user");    // юзер → /user
+            response.sendRedirect("/user");
         } else {
-            response.sendRedirect("/");        // запасной вариант
+            response.sendRedirect("/");
         }
     }
 }
