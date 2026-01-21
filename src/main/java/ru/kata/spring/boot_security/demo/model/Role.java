@@ -59,8 +59,6 @@ public class Role implements GrantedAuthority {
         this.users = users;
     }
 
-    // ==== GrantedAuthority ====
-
     @Override
     public String getAuthority() {
         return name;
@@ -69,6 +67,23 @@ public class Role implements GrantedAuthority {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Role role = (Role) o;
+        return name != null && name.equals(role.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name == null ? 0 : name.hashCode();
     }
 }
 
