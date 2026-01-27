@@ -8,6 +8,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -81,18 +84,8 @@
                             <th>Role</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td th:text="${user.id}">1</td>
-                            <td th:text="${user.firstName}">user</td>
-                            <td th:text="${user.lastName}">user</td>
-                            <td th:text="${user.age}">30</td>
-                            <td th:text="${user.email}">user@mail.ru</td>
-                            <td>
-                                <span th:each="r : ${user.roles}"
-                                      th:text="${r.name} + ' '">USER</span>
-                            </td>
-                        </tr>
+                        <tbody id="userInfoBody">
+                        <!-- filled by JS -->
                         </tbody>
                     </table>
                 </div>
@@ -104,6 +97,7 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/user.js}"></script>
 </body>
 </html>
 
